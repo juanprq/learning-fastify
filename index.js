@@ -1,5 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 
+const firstRoute = require('./routes/first');
+
 fastify.get('/', async () => {
   return { hello: 'world' };
 });
@@ -27,6 +29,8 @@ fastify.route({
     return { hello: `hello ${request.query.name}` };
   },
 });
+
+fastify.register(firstRoute);
 
 const start = async () => {
   try {
