@@ -4,6 +4,30 @@ fastify.get('/', async () => {
   return { hello: 'world' };
 });
 
+fastify.route({
+  method: 'GET',
+  url: '/hello',
+  schema: {
+    querystring: {
+      name: { type: 'string' },
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          hello: { type: 'string' },
+        },
+      },
+    },
+  },
+  preHandler: async (request, reply) => {
+    fastify.log.info('Before the handler!!');
+  },
+  handler: async (request, reply) => {
+    return { hello: `hello ${request.query.name}` };
+  },
+});
+
 const start = async () => {
   try {
     await fastify.listen(3000);
