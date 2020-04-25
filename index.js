@@ -1,7 +1,10 @@
 const fastify = require('fastify')({ logger: true });
-require('./src/models');
 
+const modelsPlugin = require('./src/plugins/models');
+const todosRoute = require('./src/routes/todos');
 const firstRoute = require('./src/routes/first');
+
+fastify.register(modelsPlugin);
 
 fastify.get('/', async () => {
   return { hello: 'world' };
@@ -32,6 +35,7 @@ fastify.route({
 });
 
 fastify.register(firstRoute);
+fastify.register(todosRoute);
 
 const start = async () => {
   try {

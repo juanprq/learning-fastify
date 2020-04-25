@@ -1,14 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const config = require('../../config/config.json');
 
 const basename = path.basename(__filename);
 const db = {};
 
 const sequelize = new Sequelize(
   {
-    dialect: 'sqlite',
-    storage: 'db.sqlite',
+    dialect: config.development.dialect,
+    storage: config.development.storage,
   },
 );
 
