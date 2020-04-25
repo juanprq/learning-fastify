@@ -1,6 +1,7 @@
 const fastify = require('fastify')({ logger: true });
+require('./src/models');
 
-const firstRoute = require('./routes/first');
+const firstRoute = require('./src/routes/first');
 
 fastify.get('/', async () => {
   return { hello: 'world' };
