@@ -6,4 +6,20 @@ module.exports = async (fastify, options) => {
 
     return todos;
   });
+
+  const postOptions = {
+    schema: {
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          done: { type: 'boolean' },
+        },
+      },
+    },
+  };
+  fastify.post('/', postOptions, async (request, reply) => {
+    const todo = await models.Todo.create(request.body);
+    return todo;
+  });
 };
