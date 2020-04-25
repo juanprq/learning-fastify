@@ -35,7 +35,7 @@ fastify.route({
 });
 
 fastify.register(firstRoute);
-fastify.register(todosRoute);
+fastify.register(todosRoute, { prefix: 'todos' });
 
 const start = async () => {
   try {
